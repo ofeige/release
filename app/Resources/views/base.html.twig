@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+
+        {% stylesheets
+
+        '@AppBundle/Resources/app.css'
+        '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less'
+        '%kernel.root_dir%/../vendor/datatables/datatables/media/css/jquery.dataTables.css'
+            %}
+        <link href="{{ asset_url }}" rel="stylesheet"/>
+        {% endstylesheets %}
+
+        {% javascripts
+        '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
+        '%kernel.root_dir%/../vendor/twitter/bootstrap/dist/js/bootstrap.min.js'
+        '%kernel.root_dir%/../vendor/datatables/datatables/media/js/jquery.dataTables.js'
+        %}
+        <script src="{{ asset_url }}" type="text/javascript"></script>
+        {% endjavascripts %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        {% include 'navigation.html.twig' %}
+
         {% block body %}{% endblock %}
+
+        <div class="container">
+            <hr/>
+            <footer>
+                <p>&copy; Oliver Feige 2014</p>
+            </footer>
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Historical data for environment: {{ environment }} / country: {{ country }}</h1>
+
+            <script type="text/javascript" charset="utf-8">
+                $(document).ready(function() {
+                    $('#release_table').dataTable({
+                        paging: false
+                    });
+                } );
+            </script>
+
+            <table id="release_table" class="display order-column hover compact" data-order='[[ 0, "desc" ]]'>
+                <thead>
+                <tr>
+                    <th>deployed at</th>
+                    <th>deployed by</th>
+                    <th>Branch</th>
+                    <th>Info</th>
+                </tr>
+                </thead>
+
+                {% for counter, value in releases %}
+                    <tr>
+                        <td>{{ value.createdAt|date('Y-m-d H:i:s') }}</td>
+                        <td>{{ value.user }}</td>
+                        <td><a href="https://github.com/allmudi/lamudi-core/tree/{{ value.branch }}">{{ value.branch }}</a></td>
+                        <td>{% if 'release' in value.branch %}<span class="label label-primary">release</span>{% elseif 'develop' in value.branch %}<span class="label label-danger">develop</span>{% elseif 'INTRES' in value.branch %}<a href="https://jira.rocket-internet.de/browse/INTRES-{{ value.branch|split('-', 3)[1] }}"><span class="label label-warning">branch</span></a>{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

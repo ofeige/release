@@ -29,18 +29,22 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/signup")
+     * @Route("/signup", name="signup")
      */
     public function signup(Request $request)
     {
         $user = new User();
-        $user->setEmail('please enter your email');
-        $user->setUsername('please enter your username');
+        //$user->setEmailPlaceholder('please enter your email');
+        //$user->setUsername('please enter your username');
 
         $form = $this->createForm(new UserType(), $user);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
+            $encoder = $this->container->get('security.password_encoder');
+            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();

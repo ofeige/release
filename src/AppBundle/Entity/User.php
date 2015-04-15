@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="username already taken")
  */
-class User implements AdvancedUserInterface, \Serializable, ContainerAwareInterface
+class User implements AdvancedUserInterface, \Serializable
 {
     /**
      * @ORM\Column(type="integer")
@@ -65,9 +64,9 @@ class User implements AdvancedUserInterface, \Serializable, ContainerAwareInterf
         $this->roles = new ArrayCollection();
     }
 
-    public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null)
+    public function setEncoder($encoder)
     {
-        $this->container = $container;
+        $this->container = $encoder;
     }
 
     public function getUsername()
@@ -168,10 +167,8 @@ class User implements AdvancedUserInterface, \Serializable, ContainerAwareInterf
      * @return User
      */
     public function setPassword($password)
-    {print_r($this->container);
-        $encoder = $this->container->get('security.password_encoder');
-
-        $this->password = $encoder->encodePassword($this->getUsername(), $password);
+    {
+        $this->password = $password;
 
         return $this;
     }
@@ -192,7 +189,7 @@ class User implements AdvancedUserInterface, \Serializable, ContainerAwareInterf
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -215,7 +212,7 @@ class User implements AdvancedUserInterface, \Serializable, ContainerAwareInterf
     /**
      * Get isActive
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsActive()
     {

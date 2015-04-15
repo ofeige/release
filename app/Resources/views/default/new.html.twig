@@ -1,8 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+<div class="container">
+
+    <h2 class="form-signin-heading">Fill out this form, to register you</h2>
+
     {{ form_start(form) }}
     {{ form_errors(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+
+</div>
+
 {% endblock %}

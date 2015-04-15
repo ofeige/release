@@ -58,14 +58,20 @@ class Releases
     protected $revision;
 
     /**
+     * @ORM\Column(type="datetime", name="created_at")
+     */
+    protected $createdAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $application;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $cluster;
 
-    /**
-     * @ORM\Column(type="datetime", name="created_at")
-     */
-    protected $createdAt;
 
     /**
      * Get id
