@@ -6,11 +6,7 @@
 
         <ul class="nav nav-tabs">
             {% for environment in environments %}
-                {% if choosen_env == environment %}
-                    <li role="presentation" class="active"><a href="{{ path('dashboardenv', {'choosenenv': environment}) }}">{{ environment }}</a></li>
-                {% else %}
-                    <li role="presentation"><a href="{{ path('dashboardenv', {'choosenenv': environment}) }}">{{ environment }}</a></li>
-                {% endif %}
+                    <li role="presentation"{{ (choosen_env == environment) ? 'class="active"' }}><a href="{{ path('dashboardenv', {'choosenenv': environment}) }}">{{ environment }}</a></li>
             {% endfor %}
         </ul>
 
