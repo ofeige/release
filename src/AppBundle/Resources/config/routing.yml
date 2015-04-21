@@ -1,3 +1,4 @@
 welcome:
     path:     /
     defaults: { _controller: AppBundle:Welcome:index }
+    
