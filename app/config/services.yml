@@ -10,10 +10,3 @@ services:
 #    user_orm:
 #        class: AppBundle\Entity\User
 #        calls: ["@security.encoder_factory"]
-
-    my.own.twig.controller_action_extension:
-        class: AppBundle\Twig\Extension\ControllerActionExtension
-        calls:
-            - [setRequest, ["@?request="]]
-        tags:
-            - { name: twig.extension }
