@@ -1,5 +1,6 @@
 {
     "name": "vagrant/release.dev",
+    "description": "release is a small pice of software to track all releases for all environments",
     "license": "proprietary",
     "type": "project",
     "autoload": {
