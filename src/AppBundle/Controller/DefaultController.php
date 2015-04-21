@@ -12,7 +12,6 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="welcome")
-     * @Method("GET")
      */
     public function indexAction()
     {
@@ -21,7 +20,6 @@ class DefaultController extends Controller
 
     /**
      * @Route("/random/{limit}", name="random")
-     * @Method("GET")
      */
     public function randomAction($limit)
     {
