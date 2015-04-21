@@ -55,9 +55,6 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $roles;
 
-    private $container;
-
-
     public function __construct()
     {
         $this->isActive = true;
