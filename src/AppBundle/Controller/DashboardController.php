@@ -15,7 +15,7 @@ class DashboardController extends Controller
      * @Security("has_role('ROLE_USER')")
      * @return Response
      */
-    public function index()
+    public function indexAction()
     {
         return $this->withenvironment('live');
     }
@@ -25,7 +25,7 @@ class DashboardController extends Controller
      * @Security("has_role('ROLE_USER')")
      * @return Response
      */
-    public function withenvironment($choosenenv)
+    public function withenvironmentAction($choosenenv)
     {
         $repository = $this->getDoctrine()
             ->getRepository('AppBundle:Releases');
@@ -78,7 +78,7 @@ class DashboardController extends Controller
      * @Security("has_role('ROLE_USER')")
      * @return Response
      */
-    public function history($choosenenv, $country)
+    public function historyAction($choosenenv, $country)
     {
         $repository = $this->getDoctrine()
             ->getRepository('AppBundle:Releases');

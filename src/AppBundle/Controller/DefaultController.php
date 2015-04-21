@@ -31,7 +31,7 @@ class DefaultController extends Controller
     /**
      * @Route("/signup", name="signup")
      */
-    public function signup(Request $request)
+    public function signupAction(Request $request)
     {
         $user = new User();
         //$user->setEmailPlaceholder('please enter your email');
@@ -60,7 +60,7 @@ class DefaultController extends Controller
     /**
      * @Route("/signup/success", name="success")
      */
-    public function success()
+    public function successAction()
     {
         return $this->render('default/value.html.twig', array(
             'value' => 'successfull registered'

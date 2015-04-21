@@ -16,7 +16,7 @@ class AdminController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @return Response
      */
-    public function index()
+    public function adminAction()
     {
         $repository = $this->getDoctrine()
             ->getRepository('AppBundle:User');
@@ -36,7 +36,7 @@ class AdminController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @return Response
      */
-    public function toggleUser($id)
+    public function toggleUserAction($id)
     {
         $this->toggle($id, 'ROLE_USER');
 
@@ -48,7 +48,7 @@ class AdminController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @return Response
      */
-    public function toggleAdmin($id)
+    public function toggleAdminAction($id)
     {
         $this->toggle($id, 'ROLE_ADMIN');
 
@@ -97,7 +97,7 @@ class AdminController extends Controller
      * @Route("/admin/info", name="admin_info")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function info()
+    public function infoAction()
     {
         return $this->render('default/value.html.twig', array(
             'headline' => 'PHP Info',
