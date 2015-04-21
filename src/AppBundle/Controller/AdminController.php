@@ -6,12 +6,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class AdminController extends Controller
 {
     /**
      * @Route("/admin", name="admin")
+     * @Method("GET")
      * @Security("has_role('ROLE_ADMIN')")
      * @return Response
      */
@@ -32,6 +33,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/toggle/user/{id}", name="toggleUser")
+     * @Method("GET")
      * @Security("has_role('ROLE_ADMIN')")
      * @return Response
      */
@@ -44,6 +46,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/toggle/admin/{id}", name="toggleAdmin")
+     * @Method("GET")
      * @Security("has_role('ROLE_ADMIN')")
      * @return Response
      */
@@ -94,6 +97,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/info", name="admin_info")
+     * @Method("GET")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function infoAction()
