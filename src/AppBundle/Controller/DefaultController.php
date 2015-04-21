@@ -12,6 +12,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="welcome")
+     * @Method("GET")
      */
     public function indexAction()
     {
@@ -20,6 +21,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/random/{limit}", name="random")
+     * @Method("GET")
      */
     public function randomAction($limit)
     {
@@ -34,8 +36,6 @@ class DefaultController extends Controller
     public function signupAction(Request $request)
     {
         $user = new User();
-        //$user->setEmailPlaceholder('please enter your email');
-        //$user->setUsername('please enter your username');
 
         $form = $this->createForm(new UserType(), $user);
         $form->handleRequest($request);
