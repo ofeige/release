@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,6 +13,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="welcome")
+     * @Method("GET")
      */
     public function indexAction()
     {
@@ -20,6 +22,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/random/{limit}", name="random")
+     * @Method("GET")
      */
     public function randomAction($limit)
     {
@@ -39,7 +42,6 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
             $encoder = $this->container->get('security.password_encoder');
             $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
@@ -57,6 +59,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/signup/success", name="success")
+     * @Method("GET")
      */
     public function successAction()
     {

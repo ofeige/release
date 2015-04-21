@@ -4,13 +4,14 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 
 class SecurityController extends Controller
 {
     /**
      * @Route("/login", name="login_route")
+     * @Method("GET")
      */
     public function loginAction(Request $request)
     {
@@ -43,6 +44,7 @@ class SecurityController extends Controller
 
     /**
      * @Route("/logout", name="logout")
+     * @Method("GET")
      */
     public function logoutAction()
     {
