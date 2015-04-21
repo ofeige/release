@@ -1,56 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Release Dashboard</h1>
+    <div class="container">
+        <h1>Release Dashboard</h1>
 
-            <ul class="nav nav-tabs">
-                {% for environment in environments %}
-                    {% if choosen_env == environment %}
-                        <li role="presentation" class="active"><a href="{{ path('dashboardenv', {'choosenenv': environment}) }}">{{ environment }}</a></li>
-                    {% else %}
-                        <li role="presentation"><a href="{{ path('dashboardenv', {'choosenenv': environment}) }}">{{ environment }}</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+        <ul class="nav nav-tabs">
+            {% for environment in environments %}
+                {% if choosen_env == environment %}
+                    <li role="presentation" class="active"><a href="{{ path('dashboardenv', {'choosenenv': environment}) }}">{{ environment }}</a></li>
+                {% else %}
+                    <li role="presentation"><a href="{{ path('dashboardenv', {'choosenenv': environment}) }}">{{ environment }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
 
-            <script type="text/javascript" charset="utf-8">
-                $(document).ready(function() {
-                    $('#release_table').dataTable({
-                        paging: false
-                    });
-                } );
-            </script>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $('#release_table').dataTable({
+                    paging: false
+                });
+            } );
+        </script>
 
-            <table id="release_table" class="display order-column hover compact">
-                <thead>
+        <table id="release_table" class="display order-column hover compact">
+            <thead>
+            <tr>
+                <th>Country</th>
+                <th>Branch</th>
+                <th>Info</th>
+                <th>deployed</th>
+                <th></th>
+            </tr>
+            </thead>
+
+            {% for counter, value in attribute(releases, choosen_env) %}
                 <tr>
-                    <th>Country</th>
-                    <th>Branch</th>
-                    <th>Info</th>
-                    <th>deployed</th>
-                    <th></th>
+                    <td><a href="http://{{ value.url }}">{{ value.country }}</a></td>
+                    <td><a href="https://github.com/allmudi/lamudi-core/tree/{{ value.branch }}">{{ value.branch }}</a></td>
+                    <td>{%
+                        if 'release' in value.branch
+                    %}<span class="label label-primary">release</span>{%
+                        elseif 'develop' in value.branch
+                    %}<span class="label label-danger">develop</span>{%
+                        elseif 'INTRES' in value.branch
+                    %}<span class="label label-warning">branch</span>
+                    {% endif %}</td>
+                    <td>{{ value.createdAt|date('Y-m-d H:i:s') }} ({{ value.user }})</td>
+                    <td align="right"><a class="btn btn-default btn-xs" href="{{ path('dashboardhistory', {'choosenenv': choosen_env, 'country': value.country}) }}">show history</a></td>
                 </tr>
-                </thead>
-
-                {% for counter, value in attribute(releases, choosen_env) %}
-                    <tr>
-                        <td><a href="http://{{ value.url }}">{{ value.country }}</a></td>
-                        <td><a href="https://github.com/allmudi/lamudi-core/tree/{{ value.branch }}">{{ value.branch }}</a></td>
-                        <td>{%
-                            if 'release' in value.branch
-                        %}<span class="label label-primary">release</span>{%
-                            elseif 'develop' in value.branch
-                        %}<span class="label label-danger">develop</span>{%
-                            elseif 'INTRES' in value.branch
-                        %}<span class="label label-warning">branch</span>
-                        {% endif %}</td>
-                        <td>{{ value.createdAt|date('Y-m-d H:i:s') }} ({{ value.user }})</td>
-                        <td align="right"><a class="btn btn-default btn-xs" href="{{ path('dashboardhistory', {'choosenenv': choosen_env, 'country': value.country}) }}">show history</a></td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
+            {% endfor %}
+        </table>
     </div>
 {% endblock %}

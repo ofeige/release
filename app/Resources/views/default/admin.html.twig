@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ headline }}</h1>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>E-Mail</th>
+                <th>isActive</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+            </thead>
+
+            {% for data in table %}
+                <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.getUsername }}</td>
+                    <td>{{ data.getEmail }}</td>
+                    <td>{{ data.isActive }}</td>
+                    <td>{% for role in data.getRoles %}{{ role.getName }}{% if loop.length > 1 and loop.last != true %}, {% endif %}{% endfor %}</td>
+                    <td style="text-align: right"><a href="{{ path('toggleAdmin', {'id': data.id}) }}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> toggle Admin</a><a href="{{ path('toggleUser', {'id': data.id}) }}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> toggle User</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
