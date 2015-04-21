@@ -14,10 +14,8 @@ class ApiController extends Controller
     /**
      * @Route("/api")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $request = Request::createFromGlobals();
-
         $release = new Releases();
         $release->setVertical($request->request->get('vertical'));
         $release->setEnvironment($request->request->get('environment'));
