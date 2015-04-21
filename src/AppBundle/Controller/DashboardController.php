@@ -17,7 +17,7 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-        return $this->withenvironment('live');
+        return $this->withenvironmentAction('live');
     }
 
     /**
