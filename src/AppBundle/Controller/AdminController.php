@@ -70,7 +70,7 @@ class AdminController extends Controller
             }
         }
 
-        if ($isAdmin == false) {
+        if ($isAdmin === false) {
             $repository = $this->getDoctrine()
                 ->getRepository('AppBundle:Role');
 
