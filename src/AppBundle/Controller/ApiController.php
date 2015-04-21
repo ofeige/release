@@ -13,6 +13,7 @@ class ApiController extends Controller
 {
     /**
      * @Route("/api")
+     * @Method("POST")
      */
     public function indexAction(Request $request)
     {

@@ -12,6 +12,7 @@ class DashboardController extends Controller
 {
     /**
      * @Route("/release", name="dashboard")
+     * @Method("GET")
      * @Security("has_role('ROLE_USER')")
      * @return Response
      */
@@ -22,6 +23,7 @@ class DashboardController extends Controller
 
     /**
      * @Route("/release/{choosenenv}", name="dashboardenv")
+     * @Method("GET")
      * @Security("has_role('ROLE_USER')")
      * @return Response
      */
@@ -75,6 +77,7 @@ class DashboardController extends Controller
 
     /**
      * @Route("/release/history/{choosenenv}/{country}", name="dashboardhistory")
+     * @Method("GET")
      * @Security("has_role('ROLE_USER')")
      * @return Response
      */
